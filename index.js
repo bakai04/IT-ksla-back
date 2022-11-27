@@ -1,64 +1,24 @@
-import http from "http";
-import EventEmitter from "events";
-const PORT = process.env.PORT || 5000;
+import express from 'express';
+import fileUpload from "express-fileupload";
+import mongoose from "mongoose";
+import { router } from "./routes.js";
 
-const emitter = new EventEmitter();
+let app = express();
+const DB_URL = "mongodb+srv://admin:admin@cluster0.bpebnq7.mongodb.net/?retryWrites=true&w=majority";
 
+app.use(express.json());
+app.use(fileUpload({}))
+app.use("/api", router);
 
-class Router {
-  constructor(){
-    this.endpoints={}
-  }
-
-  request(method = "GET", path, handler){
-    if(!this.endpoints[path]){
-      this.endpoints[path] = {}
-    }
-
-    const endpoint = this.endpoints[path];
-    
-    if(endpoint[method]){
-      throw new Error(`[${method}] по адресу ${path} не существует`);
-    }
-
-    endpoint[method] = handler;
-    emitter.on(`[${path}]:[${method}]`, (req, resp)=>{
-      handler(req, resp)
-    })
-  }
-  
-  get(path, handler){
-    this.request("GET", path, handler);
-  }
-
-  put(path, handler){
-    this.request("PUT", path, handler);
-  }
-
-  delete(path, handler){
-    this.request("DELETE", path, handler);
-  }
-
-  post(path, handler){
-    this.request("POST", path, handler);
+async function startApp(){
+  try{
+    await mongoose.connect(DB_URL, {   
+      useUnifiedTopology: true,
+      useNewUrlParser: true, })
+    app.listen(5000, ()=>console.log("server started work"))
+  }catch(e){
+    console.log(e);
   }
 }
 
-const router = new Router ();
-
-router.get("/activists", (req, resp)=>{
-  resp.end("werwefsvzvx")
-})
-
-router.get("/admin", (req, resp)=>{
-  resp.end("werwefsvzvx")
-})
-
-const server = http.createServer((req, resp)=>{
-  const emitted = emitter.emit(`[${req.url}]:[${req.method}]`, req, resp);
-  if(!emitted){
-    req.end("asd")
-  }  
-})
-
-server.listen(PORT, ()=>console.log(`server succesful started on port - ${PORT}`));
+startApp();
