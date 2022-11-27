@@ -1,6 +1,4 @@
-import ActivistsModel from "../models/activistsModel.js";
 import activistServices from "../services/activistServices.js";
-
 
 class activistsControllers {
   async create(req, res){

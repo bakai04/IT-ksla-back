@@ -7,14 +7,15 @@ let app = express();
 const DB_URL = "mongodb+srv://admin:admin@cluster0.bpebnq7.mongodb.net/?retryWrites=true&w=majority";
 
 app.use(express.json());
+app.use(express.static("static"))
 app.use(fileUpload({}))
 app.use("/api", router);
 
-async function startApp(){
+function startApp(){
   try{
-    await mongoose.connect(DB_URL, {   
-      useUnifiedTopology: true,
-      useNewUrlParser: true, })
+    mongoose.connect(DB_URL, {   
+    useUnifiedTopology: true,
+    useNewUrlParser: true, })
     app.listen(5000, ()=>console.log("server started work"))
   }catch(e){
     console.log(e);
