@@ -5,6 +5,10 @@ import studentСouncilController from "./controllers/studentСouncilController.j
 
 export const router = new Router ()
 
+router.get("/", (req, resp)=>{
+  resp.end("/activists, /administration");
+});
+
 router.post("/activists", activistsControllers.create);
 router.get("/activists", activistsControllers.getAll);
 router.get("/activists/:id", activistsControllers.getOne);
@@ -22,9 +26,3 @@ router.get("/student-council", studentСouncilController.getAll);
 router.get("/student-council/:id", studentСouncilController.getOne);
 router.put("/student-council", studentСouncilController.update);
 router.delete("/student-council/:id", studentСouncilController.delete);
- 
-// router.post("/student-council", studentСouncilController.create);
-// router.get("/student-council", studentСouncilController.getAll);
-// router.get("/student-council/:id", studentСouncilController.getOne);
-// router.put("/student-council", studentСouncilController.update);
-// router.delete("/student-council/:id", studentСouncilController.delete);
