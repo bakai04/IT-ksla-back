@@ -23,8 +23,8 @@ router.get("/student-council/:id", studentСouncilController.getOne);
 router.put("/student-council", studentСouncilController.update);
 router.delete("/student-council/:id", studentСouncilController.delete);
  
-router.post("/student-council", studentСouncilController.create);
-router.get("/student-council", studentСouncilController.getAll);
-router.get("/student-council/:id", studentСouncilController.getOne);
-router.put("/student-council", studentСouncilController.update);
-router.delete("/student-council/:id", studentСouncilController.delete);
+// router.post("/student-council", studentСouncilController.create);
+// router.get("/student-council", studentСouncilController.getAll);
+// router.get("/student-council/:id", studentСouncilController.getOne);
+// router.put("/student-council", studentСouncilController.update);
+// router.delete("/student-council/:id", studentСouncilController.delete);
