@@ -9,7 +9,7 @@ router.get("/", (req, resp)=>{
   resp.end("/activists, /administration");
 });
 
-router.post("/activists", activistsControllers.create);
+router.post("/api/activists", activistsControllers.create);
 router.get("/activists", activistsControllers.getAll);
 router.get("/activists/:id", activistsControllers.getOne);
 router.put("/activists", activistsControllers.update);
