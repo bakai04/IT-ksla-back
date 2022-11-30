@@ -1,11 +1,10 @@
 import { Router } from "express";
-import activistsControllers from "./controllers/activistsControllers.js";
-import adminController from "./controllers/adminController.js";
-import mentorsController from "./controllers/mentorsController.js";
-import studentСouncilController from "./controllers/studentСouncilController.js";
+import activistsControllers from "../activistsControllers.js";
+import adminController from "../adminController.js";
+import mentorsController from "../mentorsController.js";
+import studentСouncilController from "../studentСouncilController.js";
 
 export const router = new Router ()
-
 router.get("/", (req, resp)=>{
   resp.send("enpoints available for you - /activists , /administration , /student-council");
 });
@@ -33,6 +32,3 @@ router.get("/mentors", mentorsController.getAll);
 router.get("/mentors/:id", mentorsController.getOne);
 router.put("/mentors", mentorsController.update);
 router.delete("/mentors/:id", mentorsController.delete);
-
-
-

@@ -1,7 +1,8 @@
 import express from 'express';
 import fileUpload from "express-fileupload";
 import mongoose from "mongoose";
-import { router } from "./routes.js";
+import { router } from "./controllers/router/routes.js";
+import adminRouter, { adminBro } from "./controllers/router/admin.rout.js";
 // import swaggerUi from "swagger-ui-express";
 // import swaggerDocument from './swagger.json' assert {type: 'json'};
 
@@ -13,16 +14,18 @@ app.use(express.json());
 app.use(express.static("static"));
 app.use(fileUpload({}));
 app.use("/api", router);
+app.use(adminBro.options.rootPath, adminRouter)
 
 function startApp(){
   try{
     mongoose.connect(DB_URL, {   
     useUnifiedTopology: true,
     useNewUrlParser: true, })
-    app.listen(process.env.PORT || PORT);
+    app.listen(process.env.PORT || PORT, console.log(`server started work on port ${PORT}`));
   }catch(e){
     console.log(e);
   }
 }
 
 startApp();
+ 

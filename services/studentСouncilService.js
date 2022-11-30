@@ -5,7 +5,7 @@ class studentСouncilService {
   async create(studentСouncil, image){
     const fileName = fileService.saveFile(image);
     const newAdmin = await studentСouncilModel.create({...studentСouncil, "image": fileName});
-    return newAdmin
+    return newAdmin;
   }
   
   async update(body){
